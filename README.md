@@ -30,11 +30,11 @@ tinymce.init({
         {title: 'disc', style: 'disc'},
         {title: 'circle', style: 'circle'},
         {title: 'square', style: 'square'},
-        {title: 'bullet-list', classes: 'bullet-list'},
-        {title: 'circle-list', classes: 'circle-list'},
-        {title: 'square-list', classes: 'square-list'},
-        {title: 'arrow-list', classes: 'arrow-list'},
-        {title: 'label-list', classes: 'label-list'}
+        {title: 'Bullet List', classes: 'bullet-list'},
+        {title: 'Circle List', classes: 'circle-list'},
+        {title: 'Square List', classes: 'square-list'},
+        {title: 'Arrow List', classes: 'arrow-list'},
+        {title: 'Label List', classes: 'label-list'}
     ]
 	});
 </script>
