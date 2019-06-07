@@ -5,7 +5,7 @@ Override the bullet list button to allow custom bullet list styles
 
 clists plugin is not compatible with tinymce 5 for now
 
-###version 
+### version 
 
 [![release](https://img.shields.io/github/release/xarksass/tinymce-plugin-clists.svg)](https://github.com/xarksass/tinymce-plugin-clists/releases/latest)
 
@@ -15,11 +15,11 @@ Authors
 
  * Salvatore Di Salvo (Author-Developer) disalvo.infographiste[at]gmail[point]com
 
-###Installation
+### Installation
  * Download the dist/clists.zip archive
  * Unzip archive in tinyMCE plugin directory (tiny_mce/plugins/)
 
-###Configuration
+### Configuration
  ```html
 <script type="text/javascript">
 tinymce.init({
@@ -47,7 +47,7 @@ For custom style you can:
     * a style, the value (a string) will be used as value for the list-style-type
     * a classes, the value (a string) will be added to the UL list as a class
 
-###Languages
+### Languages
  * English
  * French
  
