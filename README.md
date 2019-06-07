@@ -7,8 +7,7 @@ clists plugin is not compatible with tinymce 5 for now
 
 ### version 
 
-[![release](https://img.shields.io/github/release/xarksass/tinymce-plugin-clists.svg)](https://github.com/xarksass/tinymce-plugin-clists/releases/latest)
-
+![GitHub release](https://img.shields.io/github/release/xarksass/tinymce-plugin-clists.svg?style=for-the-badge)
 
 Authors
 -------
