@@ -25,6 +25,7 @@ Authors
 tinymce.init({
 	selector: "textarea",
 	plugins: ["lists clists"],
+	toolbar1: 'bullist',
 	cbullet_styles: [
         'default',
         {title: 'disc', style: 'disc'},
