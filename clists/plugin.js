@@ -181,16 +181,17 @@
                 if(typeof styleValue !== 'object') styleValue = {classes: styleValue};
 
                 if(styleValue.classes === undefined) Actions.applyStyle(editor, styleValue.style);
-                else Actions.applyClass(editor, styleValue.classes)
+                else Actions.applyClass(editor, styleValue.classes);
             },
             applyClass = function (editor, className) {
                 let r = editor.execCommand('InsertUnorderedList', false, { 'list-style-type': '' });
+
                 if(r) {
                     let listElm = editor.selection.getNode();
                     let el = (elem) => elem.nodeName;
 
                     if(className !== false && className !== undefined) {
-                        if(el(listElm) === 'LI') {
+                        if(el(listElm) !== 'UL') {
                             listElm = editor.dom.getParent(editor.selection.getNode(), 'ul');
                             editor.selection.setCursorLocation(listElm);
                         }
