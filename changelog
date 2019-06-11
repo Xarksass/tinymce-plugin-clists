@@ -1,0 +1,4 @@
+#### 1.0.1
+
+Bug fix
+* Better ul detection, check if the current node is an ul or not instead of a li. 
