@@ -274,54 +274,60 @@
             addButton = function (editor, type, id, tooltip, cmd, nodeName, styles) {
                 let settings = {
                     active: false,
-                    type: type,
                     tooltip: tooltip,
-                    onPostRender: function(t) {
-                        var api = t.control;
+                    icon: 'unordered-list',
+                    onSetup: (api) => {
                         var nodeChangeHandler = function (e) {
-                            api.active(isWithinList(editor, e, nodeName));
+                            api.setActive(isWithinList(editor, e, nodeName));
                         };
                         editor.on("NodeChange", nodeChangeHandler);
+                        return function () {
+                            return editor.off('NodeChange', nodeChangeHandler);
+                        };
                     },
-                    onclick: function() {
+                    onAction: () => {
                         editor.execCommand(cmd)
                     }
                 };
 
                 if(type === 'splitbutton') {
-                    settings.menu = global$1.map(styles, function (styleValue) {
-                        let iconStyle = 'bull';
-                        let iconName = styleValue === 'disc' || styleValue === 'decimal' ? 'default' : styleValue;
-                        let itemValue = styleValue === 'default' ? '' : styleValue;
-                        let displayText = styleValueToText(styleValue);
-                        return {
-                            //type: 'choiceitem',
-                            data: itemValue,
-                            //icon: 'list-' + iconStyle + '-' + iconName,
-                            text: displayText
-                        };
-                    });
-                    settings.onshow = function(evt) {
-                        let listStyleType = ListUtils.getSelectedType(editor);
-                        evt.control.items().each(function(item) {
-                            let value = item.settings.data;
-                            let active = listStyleType.map(function (listType) {
-                                let classes = listType.classes;
-                                let style = listType.style;
-                                if( ListUtils.isEmpty(classes) && ListUtils.isEmpty(style) ) return value === '';
-                                classes = classes.length > 0 ? classes.split(' ') : [];
-                                return (value !== '' && (value === style || classes.indexOf(value) !== -1 ));
-                            }).getOr(false);
-                            item.active(active)
-                        })
+                    //settings.presets = 'normal';
+                    //settings.columns = 3;
+                    settings.fetch = function (callback) {
+                        var items = global$1.map(styles, function (styleValue) {
+                            //let iconStyle = 'bull';
+                            //let iconName = styleValue === 'disc' || styleValue === 'decimal' ? 'default' : styleValue;
+                            let itemValue = styleValue === 'default' ? '' : styleValue;
+                            let displayText = styleValueToText(styleValue);
+                            return {
+                                type: 'choiceitem',
+                                value: itemValue,
+                                //icon: 'list-' + iconStyle + '-' + iconName,
+                                text: displayText
+                            };
+                        });
+                        callback(items);
                     };
-                    settings.onselect = function(evt) {
-                        let value = evt.control.settings.data;
+                    settings.onItemAction = function (splitButtonApi, value) {
                         Actions.applyListFormat(editor, nodeName, value);
                     };
-                }
+                    settings.select = function(value) {
+                        value = value.replace(/\s+/g, '-').toLowerCase();
+                        let listStyleType = ListUtils.getSelectedType(editor);
+                        return listStyleType.map(function (listType) {
+                            let classes = listType.classes;
+                            let style = listType.style;
+                            if( ListUtils.isEmpty(classes) && ListUtils.isEmpty(style) ) return value === '';
+                            classes = classes.length > 0 ? classes.split(' ') : [];
+                            return (value !== '' && (value === style || classes.indexOf(value) !== -1 ));
+                        }).getOr(false);
+                    };
 
-                editor.addButton(id, settings);
+                    editor.ui.registry.addSplitButton(id, settings);
+                }
+                else {
+                    editor.ui.registry.addToggleButton(id, settings);
+                }
             },
             addControl = function (editor, id, tooltip, cmd, nodeName, styles) {
                 addButton(editor, styles.length > 0 ? 'splitbutton' : 'button', id, tooltip, cmd, nodeName, styles);

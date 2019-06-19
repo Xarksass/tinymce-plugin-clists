@@ -1,4 +1,4 @@
-Plugin clists for TinyMCE 4
+Plugin clists for TinyMCE 5
 ===========================
 
 Override the bullet list button to allow custom bullet list styles
