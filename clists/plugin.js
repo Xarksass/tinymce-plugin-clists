@@ -22,7 +22,7 @@
 /**
  * TinyMCE clists Plugin
  * This module, based on the advlist plugin, overwrite the bulletlist button and allow the add custom styles.
- * v 1.0.0 Stable
+ * v 1.1.0 Stable
  */
 (function() {
     tinymce.PluginManager.requireLangPack("clists");
