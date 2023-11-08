@@ -339,8 +339,9 @@
 
         global.add('clists', function (editor) {
             let hasPlugin = function (editor, plugin) {
-                var plugins = editor.settings.plugins ? editor.settings.plugins : '';
-                return global$1.inArray(plugins.split(/[ ,]/), plugin) !== -1;
+                let plugins = editor.options.get('plugins') ? editor.options.get('plugins') : '';
+                //console.log(plugins);
+                return global$1.inArray(plugins.toString().split(/[ ,]/), plugin) !== -1;
             };
 
             if (hasPlugin(editor, 'lists')) {
